@@ -837,7 +837,7 @@ var _generateAssociationRequestParameters = function(version, algorithm)
   return params;
 }
 
-openid.authenticate = function(identifier, returnUrl, realm, immediate, stateless, callback, extensions, strict)
+openid.authenticate = function(identifier, returnUrl, realm, immediate, stateless, callback, extensions, strict, algorithm)
 {
   openid.discover(identifier, strict, function(error, providers)
   {
@@ -905,7 +905,7 @@ openid.authenticate = function(identifier, returnUrl, realm, immediate, stateles
             _requestAuthentication(currentProvider, answer.assoc_handle, returnUrl, 
               realm, immediate, extensions || {}, successOrNext);
           }
-        });
+        }, strict, algorithm);
         
       }
     };
