@@ -261,7 +261,7 @@ var _get = function(getUrl, params, callback, redirects)
 var _post = function(postUrl, data, callback, redirects)
 {
   console.log(postUrl);
-  console.log(params);
+  console.log(data);
 
   redirects = redirects || 5;
   postUrl = url.parse(postUrl);
