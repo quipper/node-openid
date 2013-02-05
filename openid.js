@@ -203,6 +203,9 @@ var _proxyRequest = function(protocol, options)
 
 var _get = function(getUrl, params, callback, redirects)
 {
+  console.log(getUrl);
+  console.log(params);
+
   redirects = redirects || 5;
   getUrl = url.parse(_buildUrl(getUrl, params));
 
@@ -257,6 +260,9 @@ var _get = function(getUrl, params, callback, redirects)
 
 var _post = function(postUrl, data, callback, redirects)
 {
+  console.log(postUrl);
+  console.log(params);
+
   redirects = redirects || 5;
   postUrl = url.parse(postUrl);
 
