@@ -220,7 +220,7 @@ var _get = function(getUrl, params, callback, redirects)
     path: path
   };
 
-  console.log("get");
+  console.log(":get");
   console.log(options);
 
   _proxyRequest(getUrl.protocol, options);
@@ -240,7 +240,7 @@ var _get = function(getUrl, params, callback, redirects)
         var redirectUrl = res.headers.location;
         if(redirectUrl.indexOf('http') !== 0)
         {
-          console.log('redirect');
+          console.log(':redirect');
           redirectUrl = getUrl.protocol + '//' + getUrl.hostname + ':' + options.port + (redirectUrl.indexOf('/') === 0 ? redirectUrl : '/' + redirectUrl);
           console.log(redirectUrl);
         }
@@ -248,7 +248,7 @@ var _get = function(getUrl, params, callback, redirects)
       }
       else
       {
-        console.log("data");
+        console.log(":data");
         console.log(data);
         callback(data, res.headers, res.statusCode);
       }
@@ -288,8 +288,13 @@ var _post = function(postUrl, data, callback, redirects)
     method: 'POST'
   };
 
-  console.log("post");
+  console.log(":post");
+  console.log(":options");
   console.log(options);
+  console.log(":data");
+  console.log(data);
+  console.log(":encodedData");
+  console.log(encodedData);
 
   _proxyRequest(postUrl.protocol, options);
 
@@ -305,14 +310,14 @@ var _post = function(postUrl, data, callback, redirects)
     {
       if(res.headers.location && --redirects)
       {
-          console.log("redirect");
+          console.log(":redirect");
           console.log(redirects);
 
         _post(res.headers.location, params, callback, redirects);
       }
       else
       {
-          console.log("data");
+          console.log(":data");
           console.log(data);
         callback(data, res.headers, res.statusCode);
       }
