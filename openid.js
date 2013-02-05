@@ -203,9 +203,6 @@ var _proxyRequest = function(protocol, options)
 
 var _get = function(getUrl, params, callback, redirects)
 {
-  console.log(getUrl);
-  console.log(params);
-
   redirects = redirects || 5;
   getUrl = url.parse(_buildUrl(getUrl, params));
 
@@ -222,6 +219,9 @@ var _get = function(getUrl, params, callback, redirects)
     headers: { 'Accept' : 'application/xrds+xml,text/html,text/plain,*/*' },
     path: path
   };
+
+  console.log("get");
+  console.log(options);
 
   _proxyRequest(getUrl.protocol, options);
 
@@ -240,12 +240,16 @@ var _get = function(getUrl, params, callback, redirects)
         var redirectUrl = res.headers.location;
         if(redirectUrl.indexOf('http') !== 0)
         {
+          console.log('redirect');
           redirectUrl = getUrl.protocol + '//' + getUrl.hostname + ':' + options.port + (redirectUrl.indexOf('/') === 0 ? redirectUrl : '/' + redirectUrl);
+          console.log(redirectUrl);
         }
         _get(redirectUrl, params, callback, redirects);
       }
       else
       {
+        console.log("data");
+        console.log(data);
         callback(data, res.headers, res.statusCode);
       }
     }
@@ -260,9 +264,6 @@ var _get = function(getUrl, params, callback, redirects)
 
 var _post = function(postUrl, data, callback, redirects)
 {
-  console.log(postUrl);
-  console.log(data);
-
   redirects = redirects || 5;
   postUrl = url.parse(postUrl);
 
@@ -287,6 +288,9 @@ var _post = function(postUrl, data, callback, redirects)
     method: 'POST'
   };
 
+  console.log("post");
+  console.log(options);
+
   _proxyRequest(postUrl.protocol, options);
 
   (postUrl.protocol == 'https:' ? https : http).request(options, function(res)
@@ -301,10 +305,15 @@ var _post = function(postUrl, data, callback, redirects)
     {
       if(res.headers.location && --redirects)
       {
+          console.log("redirect");
+          console.log(redirects);
+
         _post(res.headers.location, params, callback, redirects);
       }
       else
       {
+          console.log("data");
+          console.log(data);
         callback(data, res.headers, res.statusCode);
       }
     }
