@@ -319,9 +319,6 @@ var _post = function(postUrl, data, callback, redirects)
       {
           console.log(":data2");
           console.log(data);
-        delete data['assoc_handle'];
-          console.log(":data3");
-          console.log(data);
         callback(data, res.headers, res.statusCode);
       }
     }
