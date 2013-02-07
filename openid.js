@@ -317,7 +317,10 @@ var _post = function(postUrl, data, callback, redirects)
       }
       else
       {
-          console.log(":data");
+          console.log(":data2");
+          console.log(data);
+        delete data['assoc_handle'];
+          console.log(":data3");
           console.log(data);
         callback(data, res.headers, res.statusCode);
       }
@@ -1007,6 +1010,9 @@ var _requestAuthentication = function(provider, assoc_handle, returnUrl, realm, 
     return callback({ message: 'No return URL or realm specified' });
   }
 
+  console.log(":provider_endpoint");
+  console.log(provider.endpoint);
+  console.log(params);
   callback(null, _buildUrl(provider.endpoint, params));
 }
 
